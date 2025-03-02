@@ -5,24 +5,62 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f4f4f4;
+    margin: 0;
 }
+
 .login-container {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
 }
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 input {
     display: block;
     width: 100%;
-    margin: 10px 0;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
+
 button {
     width: 100%;
-    padding: 10px;
-    background: #28a745;
+    padding: 12px;
+    background: linear-gradient(to right, #FFA500, #FFD700);
     color: white;
     border: none;
+    font-size: 16px;
+    border-radius: 30px; 
     cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+button:hover {
+    background: linear-gradient(to right, #ff8c00, #ffcc00);
+}
+
+#error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    height: 15px;
 }
