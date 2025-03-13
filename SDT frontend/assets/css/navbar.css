@@ -25,6 +25,11 @@
     color: black;
 }
 
+.navbar-nav .nav-link.active {
+    color: black; /* Change color for active link */
+    background-color: rgba(255, 255, 255, 0.2); /* Optional: Add background color */
+}
+
 .navbar-toggler {
     border-color: white;
 }
