@@ -16,4 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     typeText();
+
+    // Click event logic
+    let clickCount = 0;
+
+    // Add click event listener
+    welcomeText.addEventListener("click", function() {
+        clickCount++;
+
+        // Check if the heading has been clicked 5 times
+        if (clickCount >= 5) {
+            // Navigate to adminlogin.html
+            window.location.href = "/SDT frontend/admin pages/adminlogin.html";
+        }
+    });
 });
