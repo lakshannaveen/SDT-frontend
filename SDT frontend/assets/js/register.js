@@ -1,21 +1,21 @@
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const fullname = document.getElementById('fullname').value.trim();
+    const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
     const errorMessage = document.getElementById('error-message');
 
-    // Full name validation: only letters and spaces, max 30 characters
-    const nameRegex = /^[A-Za-z\s]{1,30}$/;
-    if (!nameRegex.test(fullname)) {
-        errorMessage.textContent = "Full Name must contain only letters and spaces, max 30 characters.";
+    // Name validation: max 10 characters, only English letters (A-Z, a-z)
+    const nameRegex = /^[A-Za-z]{1,10}$/;
+    if (!nameRegex.test(name)) {
+        errorMessage.textContent = "Name must contain only English letters and be a maximum of 10 characters.";
         return;
     }
 
-    // Email validation using basic pattern
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Email validation: must follow email format
+    const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
     if (!emailRegex.test(email)) {
-        errorMessage.textContent = "Please enter a valid email address.";
+        errorMessage.textContent = "Email must be in a valid format (example@gmail.com).";
         return;
     }
 
@@ -26,25 +26,36 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         return;
     }
 
-    // If validation passes, clear error and redirect
+    // If validation passes, clear the error message and redirect
     errorMessage.textContent = "";
-    window.location.href = "dashboard.html"; // Redirect after successful registration
+    window.location.href = "dashboard.html";
 });
 
-// Progress effect for input fields
-const fullnameInput = document.getElementById('fullname');
+// Update background progress based on input length
+const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 
-const maxLength = 16;
+const maxLength = 16; // Maximum characters allowed
 
-fullnameInput.addEventListener('input', updateInputFill);
-emailInput.addEventListener('input', updateInputFill);
+nameInput.addEventListener('input', updateInputFill);
 passwordInput.addEventListener('input', updateInputFill);
+emailInput.addEventListener('input', updateEmailFill);
 
 function updateInputFill() {
-    updateProgressBar(fullnameInput, fullnameInput.value.length);
-    updateProgressBar(passwordInput, passwordInput.value.length);
+    updateProgressBar(this, this.value.length);
+}
+
+function updateEmailFill() {
+    const value = emailInput.value;
+    const atIndex = value.indexOf('@');
+    
+    if (atIndex !== -1) {
+        const fillPercentage = ((atIndex + 1) / maxLength) * 100;
+        emailInput.style.backgroundSize = `${fillPercentage}% 100%`;
+    } else {
+        updateProgressBar(emailInput, value.length);
+    }
 }
 
 function updateProgressBar(inputElement, length) {

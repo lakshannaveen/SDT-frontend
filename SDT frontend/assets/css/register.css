@@ -73,6 +73,18 @@ input:focus::placeholder {
     opacity: 0;
 }
 
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 @media (max-width: 576px) {
     .register-container {
         width: 90%;
