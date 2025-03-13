@@ -49,12 +49,19 @@ function updateInputFill() {
 function updateEmailFill() {
     const value = emailInput.value;
     const atIndex = value.indexOf('@');
-    
+
     if (atIndex !== -1) {
-        const fillPercentage = ((atIndex + 1) / maxLength) * 100;
+        const beforeAt = value.substring(0, atIndex).length;
+        const afterAt = value.substring(atIndex).length;
+
+        const beforeAtPercentage = Math.min((beforeAt / 10) * 50, 50); // Max 50% for characters before @
+        const afterAtPercentage = Math.min((afterAt / 10) * 50, 50); // Max 50% for '@gmail.com'
+
+        const fillPercentage = beforeAtPercentage + afterAtPercentage;
         emailInput.style.backgroundSize = `${fillPercentage}% 100%`;
     } else {
-        updateProgressBar(emailInput, value.length);
+        const fillPercentage = Math.min((value.length / 10) * 50, 50);
+        emailInput.style.backgroundSize = `${fillPercentage}% 100%`;
     }
 }
 
