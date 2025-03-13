@@ -4,18 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/navbar.css"> <!-- Ensure this line is present -->
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+
 </head>
 <body>
 
-    <!-- Navbar will be inserted here -->
+    <!-- Navbar -->
     <div id="navbar-placeholder"></div>
 
     <h1>Air Quality Dashboard</h1>
     <p>Welcome to the dashboard!</p>
 
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../assets/js/loadNavbar.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 
 </body>
 </html>
