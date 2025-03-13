@@ -1,4 +1,5 @@
-body {
+/* Apply styles only for the homepage */
+.home {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -9,7 +10,7 @@ body {
 }
 
 /* Container for the diagonal split */
-.container {
+.home .container {
     display: flex;
     width: 80%;
     height: 60%;
@@ -18,7 +19,7 @@ body {
 }
 
 /* Left Section - Buttons */
-.left {
+.home .left {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -30,7 +31,7 @@ body {
 }
 
 /* Right Section - Logo */
-.right {
+.home .right {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -40,7 +41,7 @@ body {
 }
 
 /* Logo Styling */
-.logo {
+.home .logo {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -51,7 +52,7 @@ body {
 }
 
 /* Centered Welcome Text */
-h1 {
+.home h1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -63,7 +64,7 @@ h1 {
 }
 
 /* Buttons Styling */
-.login-btn, .register-btn {
+.home .login-btn, .home .register-btn {
     display: inline-block;
     padding: 12px 20px;
     background: linear-gradient(45deg, #ff8c00, #ffcc00);
@@ -75,7 +76,7 @@ h1 {
     transition: transform 0.3s, background 0.3s;
 }
 
-.login-btn:hover, .register-btn:hover {
+.home .login-btn:hover, .home .register-btn:hover {
     background: linear-gradient(45deg, #ff9900, #ff6600);
     transform: scale(1.05);
 }
