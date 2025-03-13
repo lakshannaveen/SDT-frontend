@@ -41,7 +41,7 @@ function enableNavClickClose() {
     });
 }
 
-// ✅ Function to manually reinitialize the Bootstrap navbar
+//  Function to manually reinitialize the Bootstrap navbar
 function reinitializeNavbar() {
     let navbarToggler = document.querySelector(".navbar-toggler");
     let navbarCollapse = document.querySelector(".navbar-collapse");
