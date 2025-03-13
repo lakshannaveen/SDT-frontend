@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const welcomeText = document.getElementById("welcome-text");
 
     // Typing Animation Effect
-    let text = "Welcome to the Air Quality Monitoring Dashboard";
+    let text = " Welcome ";
     let index = 0;
 
     function typeText() {
