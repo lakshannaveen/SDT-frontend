@@ -1,0 +1,19 @@
+/* Home Page Styling */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Map Container */
+.map-container {
+    margin: 40px auto; /* Adds spacing around the map */
+    padding: 20px;
+    max-width: 90%;
+}
+
+/* Map Styling */
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
