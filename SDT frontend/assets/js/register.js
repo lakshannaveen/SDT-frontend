@@ -28,7 +28,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
     // If validation passes, clear the error message and redirect
     errorMessage.textContent = "";
-    window.location.href = "dashboard.html";
+    window.location.href = "home.html";
 });
 
 // Update background progress based on input length

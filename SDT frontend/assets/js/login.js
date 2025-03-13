@@ -20,7 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
     // If validation passes, clear the error message and redirect
     errorMessage.textContent = ""; // Clear error message
-    window.location.href = "dashboard.html"; // Redirect after successful validation
+    window.location.href = "home.html"; // Redirect after successful validation
 });
 
 // Update background progress based on input length

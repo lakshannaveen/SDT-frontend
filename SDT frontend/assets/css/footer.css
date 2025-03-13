@@ -1,0 +1,45 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
+.footer {
+    background: linear-gradient(to right, #d97706, #facc15); 
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease; 
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+    color: black; 
+}
