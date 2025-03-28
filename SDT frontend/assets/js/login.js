@@ -1,4 +1,4 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+document.getElementById('loginForm').addEventListener('submit', async function (event) {
     event.preventDefault();
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -18,11 +18,34 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         return;
     }
 
-    // If validation passes, clear the error message and redirect
-    errorMessage.textContent = ""; // Clear error message
-    window.location.href = "home.html"; // Redirect after successful validation
-});
+    // If validation passes, clear the error message
+    errorMessage.textContent = "";
 
+    try {
+        const payload = { name: username, password }; // Send 'name' and 'password' only
+        console.log("Payload being sent:", payload); // Debugging line
+        
+        const response = await fetch('https://localhost:7073/api/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+        console.log("Response from server:", result); // Debugging line
+
+        if (response.ok) {
+            alert('Login successful!');
+            window.location.href = "home.html";
+        } else {
+            errorMessage.textContent = result.message || 'Invalid username or password.';
+        }
+    } catch (error) {
+        errorMessage.textContent = 'An error occurred. Please try again.';
+        console.error("Error during login:", error); // Debugging line
+    }
+});
 // Update background progress based on input length
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
