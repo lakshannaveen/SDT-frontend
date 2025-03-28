@@ -1,4 +1,4 @@
-document.getElementById('registerForm').addEventListener('submit', function(event) {
+document.getElementById('registerForm').addEventListener('submit', async function (event) {
     event.preventDefault();
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -26,9 +26,31 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         return;
     }
 
-    // If validation passes, clear the error message and redirect
+    // If validation passes, clear the error message
     errorMessage.textContent = "";
-    window.location.href = "home.html";
+
+    // Send data to the server
+    try {
+        const response = await fetch('https://localhost:7073/api/user/register', { 
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password }),
+        });
+        
+        
+        const result = await response.json();
+        if (response.ok) {
+            alert('Registration successful!');
+            window.location.href = "home.html";
+        } else {
+            errorMessage.textContent = result.message || 'Registration failed.';
+        }
+    } catch (error) {
+        errorMessage.textContent = 'An error occurred. Please try again.';
+    }
 });
 
 // Update background progress based on input length
