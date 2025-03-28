@@ -18,18 +18,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = passwordInput.value.trim();
         let isValid = true;
 
-        ///Username validation exactly 8 characters including numbers///
-        if (username.length !== 8 || !/\d/.test(username)) {
-            usernameHelp.textContent = 'Must be 8 characters long.';
+        ///Username validation: minimum 4 characters, must include at least one letter///
+        const usernameRegex = /^(?=.*[A-Za-z])[A-Za-z\d]{4,}$/;
+        if (!usernameRegex.test(username)) {
+            usernameHelp.textContent = 'Username must be at least 4 characters long and include at least one letter.';
             isValid = false;
         } else {
             usernameHelp.textContent = '';
         }
 
-        ///Password validation must be exactly 8 characters, with required complexity///
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$/;
+        ///Password validation: minimum 8 characters, must include at least one uppercase, one lowercase, and one number///
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
         if (!passwordRegex.test(password)) {
-            passwordHelp.textContent = 'Must be 8 characters long, with at least one uppercase, one lowercase, one number, and one special character.';
+            passwordHelp.textContent = 'Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, and one number.';
             isValid = false;
         } else {
             passwordHelp.textContent = '';
