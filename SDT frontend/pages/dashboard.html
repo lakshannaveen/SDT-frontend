@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-     <!-- Favicon -->
-     <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
+    
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
@@ -13,7 +14,6 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
-
 </head>
 <body>
 
@@ -21,10 +21,22 @@
     <div id="navbar-placeholder"></div>
 
     <h1>Air Quality Dashboard</h1>
-    <p>Welcome to the dashboard!</p>
+    <p>Welcome to the dashboard! Monitor the air quality in Colombo.</p>
 
     <!-- Map Container -->
     <div id="map"></div>
+
+    <!-- AQI Legend -->
+    <div id="aqi-legend">
+        <h4>Air Quality Legend</h4>
+        <ul>
+            <li><span class="color-indicator good"></span> Good (0 - 50)</li>
+            <li><span class="color-indicator moderate"></span> Moderate (51 - 100)</li>
+            <li><span class="color-indicator unhealthy"></span> Unhealthy (101 - 150)</li>
+            <li><span class="color-indicator very-unhealthy"></span> Very Unhealthy (151 - 200)</li>
+            <li><span class="color-indicator hazardous"></span> Hazardous (201+)</li>
+        </ul>
+    </div>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
