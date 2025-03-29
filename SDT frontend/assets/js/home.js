@@ -7,11 +7,25 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Error loading navbar:", error));
 
-    // Initialize Leaflet Map centered on Sri Lanka
-    var map = L.map('map').setView([7.8731, 80.7718], 7); // Sri Lanka coordinates
+    // Load Footer
+    fetch("../assets/components/footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer-placeholder").innerHTML = data;
+        })
+        .catch(error => console.error("Error loading footer:", error));
 
-    // Load OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+    // Add any additional home page specific JavaScript here
+    console.log("Home page loaded successfully");
+    
+    // Example: Add click animation to buttons
+    const buttons = document.querySelectorAll('.access-btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.classList.add('animate__pulse');
+            setTimeout(() => {
+                this.classList.remove('animate__pulse');
+            }, 500);
+        });
+    });
 });
