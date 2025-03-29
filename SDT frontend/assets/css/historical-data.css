@@ -16,13 +16,28 @@
     background-color: #f1f1f1;
 }
 
-#downloadPdf {
-    height: 38px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.download-btn {
+    background: linear-gradient(45deg, #FFA500, #FFD700);
+    color: white;
+    border: none;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
+.download-btn:hover {
+    background: linear-gradient(45deg, #FF8C00, #FFC700);
+    transform: scale(1.05);
+}
+
+.download-btn:active {
+    transform: scale(0.95);
+}
+
+.d-flex.justify-content-end {
+    margin-bottom: 10px;
+}
 @media (max-width: 768px) {
     .d-flex.justify-content-between.align-items-center {
         flex-direction: column;
