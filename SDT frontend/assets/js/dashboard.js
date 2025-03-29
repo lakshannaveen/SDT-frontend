@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var map = L.map('map').setView([7.8731, 80.7718], 7); // Sri Lanka center
+    // Set the map's center to Colombo (coordinates: 6.9271, 79.8612)
+    var map = L.map('map').setView([6.9271, 79.8612], 12); // Colombo center at zoom level 12 for better view
 
     // Load OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
