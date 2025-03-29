@@ -3,76 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historical Data</title>
-     <!-- Favicon -->
-     <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/navbar.css">
-    <link rel="stylesheet" href="../assets/css/historical-data.css">
+    <title>Real-time Air Quality Data</title>
+    <link rel="stylesheet" href="/SDT frontend/assets/css/historical-data.css">
 </head>
 <body>
+    <h1>Real-time Air Quality Data</h1>
 
-    <!-- Navbar Placeholder -->
-    <div id="navbar-placeholder"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>CO2 (ppm)</th>
+                <th>PM2.5</th>
+                <th>Temperature (°C)</th>
+                <th>Humidity (%)</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody id="dataTable">
+        </tbody>
+    </table>
 
-    <div class="container mt-5 pt-5">
-        <h1 class="text-center">Historical Data</h1>
-        <p class="text-center">View past air quality data for analysis.</p>
+    <script src="/SDT frontend/assets/js/historical-data.js"></script>
 
-        <!-- Table for historical data -->
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Date</th>
-                        <th>Location</th>
-                        <th>PM2.5</th>
-                        <th>PM10</th>
-                        <th>NO2</th>
-                        <th>CO</th>
-                        <th>O3</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2025-03-10</td>
-                        <td>New York</td>
-                        <td>35 µg/m³</td>
-                        <td>60 µg/m³</td>
-                        <td>20 ppb</td>
-                        <td>0.8 ppm</td>
-                        <td>45 ppb</td>
-                    </tr>
-                    <tr>
-                        <td>2025-03-09</td>
-                        <td>Los Angeles</td>
-                        <td>50 µg/m³</td>
-                        <td>80 µg/m³</td>
-                        <td>25 ppb</td>
-                        <td>1.0 ppm</td>
-                        <td>50 ppb</td>
-                    </tr>
-                    <tr>
-                        <td>2025-03-08</td>
-                        <td>Chicago</td>
-                        <td>40 µg/m³</td>
-                        <td>70 µg/m³</td>
-                        <td>22 ppb</td>
-                        <td>0.9 ppm</td>
-                        <td>48 ppb</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/loadNavbar.js"></script>
 </body>
 </html>
