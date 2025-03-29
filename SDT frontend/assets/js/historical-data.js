@@ -2,6 +2,13 @@ const apiBaseUrl = "https://localhost:7073/api/airquality";
 let currentData = []; // Store the current data for PDF generation
 
 function fetchAirQualityData() {
+    const loadingSpinner = document.getElementById("loadingSpinner"); // Reference to the spinner
+    const dataTable = document.getElementById("dataTable");
+
+    // Show the loading spinner
+    loadingSpinner.style.display = "block";
+    dataTable.style.opacity = "0.5"; // Optional: Dim the table while loading
+
     fetch(apiBaseUrl)
         .then(response => {
             if (!response.ok) {
@@ -16,7 +23,6 @@ function fetchAirQualityData() {
                 throw new Error("API response status not ok");
             }
 
-            const dataTable = document.getElementById("dataTable");
             dataTable.innerHTML = "";
             currentData = []; // Reset current data
 
@@ -51,66 +57,11 @@ function fetchAirQualityData() {
         })
         .catch(error => {
             console.error("Error fetching data:", error);
-            });
-}
-
-function downloadAsPDF() {
-    // Import jsPDF dynamically to avoid loading it unless needed
-    import('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
-        .then(() => {
-            import('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js')
-                .then(() => {
-                    const { jsPDF } = window.jspdf;
-                    
-                    const doc = new jsPDF();
-                    const title = "Real-time Air Quality Data";
-                    const date = new Date().toLocaleString();
-                    
-                    // Add title
-                    doc.setFontSize(18);
-                    doc.text(title, 14, 15);
-                    
-                    // Add date
-                    doc.setFontSize(10);
-                    doc.text(`Generated on: ${date}`, 14, 23);
-                    
-                    // Prepare data for the table
-                    const tableData = currentData.map(item => [
-                        item.location,
-                        item.co2,
-                        item.pm25,
-                        item.temperature,
-                        item.humidity,
-                        item.lastUpdated
-                    ]);
-                    
-                    // Add table
-                    doc.autoTable({
-                        head: [['Location', 'CO2 (ppm)', 'PM2.5', 'Temperature (°C)', 'Humidity (%)', 'Last Updated']],
-                        body: tableData,
-                        startY: 30,
-                        styles: {
-                            fontSize: 8,
-                            cellPadding: 2
-                        },
-                        headStyles: {
-                            fillColor: [41, 128, 185],
-                            textColor: 255,
-                            fontStyle: 'bold'
-                        }
-                    });
-                    
-                    // Save the PDF
-                    doc.save(`AirQualityData_${new Date().toISOString().slice(0,10)}.pdf`);
-                })
-                .catch(error => {
-                    console.error("Error loading autotable:", error);
-                    alert("Error loading PDF generator. Please try again.");
-                });
         })
-        .catch(error => {
-            console.error("Error loading jsPDF:", error);
-            alert("Error loading PDF generator. Please try again.");
+        .finally(() => {
+            // Hide the loading spinner
+            loadingSpinner.style.display = "none";
+            dataTable.style.opacity = "1"; // Restore table opacity
         });
 }
 
