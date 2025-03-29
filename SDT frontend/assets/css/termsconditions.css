@@ -1,0 +1,107 @@
+header {
+    background-color: #d97706;
+    text-align: center;
+    padding: 20px;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+h1 {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.subtitle span {
+    font-weight: bold;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 1.6rem;
+    color: #2980b9;
+}
+
+.text-body {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.text-body a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+.text-body a:hover {
+    text-decoration: underline;
+}
+
+.recommendation {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .text-body {
+        font-size: 1rem;
+    }
+}
+
+/* List Styles */
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+ul > li > ul {
+    list-style-type: circle;
+    padding-left: 20px;
+}
+
+ul > li > ul > li > ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+ol li {
+    font-family: Arial, sans-serif;
+}
