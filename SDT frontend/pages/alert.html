@@ -3,29 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alert</title>
-     <!-- Favicon -->
-     <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <title>Colombo Air Quality Alerts</title>
+    <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/alert.css">
-
 </head>
 <body>
-
-    <!-- Navbar -->
     <div id="navbar-placeholder"></div>
+    <div class="navbar-spacer"></div>
 
-    <h1>Welcome to Alert Page</h1>
-    <p>This is the alert page.</p>
+    <div class="alert-container">
+        <div class="alert-header-section">
+            <h1><i class="fas fa-exclamation-triangle"></i> Colombo Air Quality Alerts</h1>
+            <div class="alert-ranges">
+                <span class="range-label unhealthy">Unhealthy (101-150)</span>
+                <span class="range-label very-unhealthy">Very Unhealthy (151-200)</span>
+                <span class="range-label hazardous">Hazardous (201+)</span>
+            </div>
+        </div>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <div class="alert-table-header">
+            <div class="header-item location">Location</div>
+            <div class="header-item aqi">AQI</div>
+            <div class="header-item level">Level</div>
+            <div class="header-item pollutant">Main Pollutant</div>
+            <div class="header-item time">Updated</div>
+        </div>
+        
+        <div id="alerts-list" class="alerts-list"></div>
+        
+        <div id="no-alerts" class="no-alerts">
+            <i class="fas fa-check-circle"></i>
+            <p>No unhealthy air quality found currently</p>
+            <small>All Colombo stations reporting AQI ≤ 100</small>
+        </div>
+    </div>
+
     <script src="../assets/js/loadNavbar.js"></script>
-
+    <script src="../assets/js/alert.js"></script>
 </body>
 </html>
