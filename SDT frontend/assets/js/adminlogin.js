@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const usernameHelp = document.getElementById('usernameHelp');
     const passwordHelp = document.getElementById('passwordHelp');
 
-    ///Retrieve click count from localStorage or initialize it///
+    /// Retrieve click count from localStorage or initialize it ///
     let clickCount = parseInt(localStorage.getItem('clickCount')) || 0;
 
     loginForm.addEventListener('submit', function (event) {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = passwordInput.value.trim();
         let isValid = true;
 
-        ///Username validation: minimum 4 characters, must include at least one letter///
+        /// Username validation ///
         const usernameRegex = /^(?=.*[A-Za-z])[A-Za-z\d]{4,}$/;
         if (!usernameRegex.test(username)) {
             usernameHelp.textContent = 'Username must be at least 4 characters long and include at least one letter.';
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             usernameHelp.textContent = '';
         }
 
-        ///Password validation: minimum 8 characters, must include at least one uppercase, one lowercase, and one number///
+        /// Password validation ///
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
         if (!passwordRegex.test(password)) {
             passwordHelp.textContent = 'Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, and one number.';
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             passwordHelp.textContent = '';
         }
 
-        ///Track login attempts only for "admin123"///
+        /// Track login attempts only for "admin123" ///
         if (username === 'admin123') {
             clickCount++;
             localStorage.setItem('clickCount', clickCount);
@@ -52,10 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('clickCount'); 
         }
 
-        ///Allow form submission if validation passes///
+        /// Allow form submission if validation passes ///
         if (isValid) {
-            localStorage.removeItem('clickCount');
-            loginForm.submit(); 
+            localStorage.setItem('isAdminLoggedIn', 'true');  // Store login status
+            window.location.href = 'admin_dashboard.html';  // Redirect to dashboard
         }
     });
 });
