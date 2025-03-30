@@ -70,96 +70,68 @@ document.addEventListener('DOMContentLoaded', function () {
         aqiStatus.textContent = status;
         aqiStatus.className = className;
     });
-
-    // Form submission
-    dataForm.addEventListener('submit', function(e) {
+    dataForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Validate form
-        let isValid = true;
-        
-        // Check latitude
-        const latValue = parseFloat(latitudeInput.value);
-        if (isNaN(latValue)) {
-            latitudeInput.classList.add('is-invalid');
-            isValid = false;
-        } else if (latValue < -90 || latValue > 90) {
-            latitudeInput.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            latitudeInput.classList.remove('is-invalid');
-        }
-        
-        // Check longitude
-        const lngValue = parseFloat(longitudeInput.value);
-        if (isNaN(lngValue)) {
-            longitudeInput.classList.add('is-invalid');
-            isValid = false;
-        } else if (lngValue < -180 || lngValue > 180) {
-            longitudeInput.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            longitudeInput.classList.remove('is-invalid');
-        }
-        
-        // Check humidity
-        const humidityValue = parseFloat(humidityInput.value);
-        if (isNaN(humidityValue)) {
-            humidityInput.classList.add('is-invalid');
-            isValid = false;
-        } else if (humidityValue < 0 || humidityValue > 100) {
-            humidityInput.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            humidityInput.classList.remove('is-invalid');
-        }
-        
-        // If form is valid, proceed with submission
-        if (isValid) {
-            // Create data object
+        try {
+            // Get the timestamp input
+            const timestampInput = document.getElementById('timestamp');
+            let timestampValue = timestampInput.value;
+            
+            // If empty, use current time in UTC
+            if (!timestampValue) {
+                timestampValue = new Date().toISOString().slice(0, 16);
+            }
+            
+            // Create data object with proper number types
             const formData = {
                 stationName: document.getElementById('stationName').value,
-                latitude: latValue,
-                longitude: lngValue,
-                timestamp: document.getElementById('timestamp').value,
+                latitude: parseFloat(latitudeInput.value),
+                longitude: parseFloat(longitudeInput.value),
+                timestamp: new Date(timestampValue).toISOString(), // Convert to ISO string (UTC)
                 aqi: parseInt(document.getElementById('aqi').value),
                 pm25: parseFloat(document.getElementById('pm25').value),
                 co: parseFloat(document.getElementById('co').value),
                 temperature: parseFloat(document.getElementById('temperature').value),
-                humidity: humidityValue
+                humidity: parseFloat(humidityInput.value)
             };
             
-            // Here you would typically send the data to your backend
-            console.log('Station data to be submitted:', formData);
-            
-            // Show success message
+            // Send data to backend
+            const response = await fetch('https://localhost:7073/api/StationData/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Server error:', errorData);
+                throw new Error(errorData.message || errorData.error || 'Failed to submit data');
+            }
+
+            const result = await response.json();
             alert('Station data submitted successfully!');
-            
-            // Reset form
             dataForm.reset();
             
             // Reset AQI status
             aqiStatus.textContent = '';
             aqiStatus.className = '';
             
-            // Set current datetime
+            // Set current datetime in local time for display
             const now = new Date();
             const timezoneOffset = now.getTimezoneOffset() * 60000;
             const localISOTime = (new Date(now - timezoneOffset)).toISOString().slice(0, 16);
             document.getElementById('timestamp').value = localISOTime;
             
-            // Optionally redirect to dashboard
-            // window.location.href = 'admindashboard.html';
-        } else {
-            // Scroll to first invalid field
-            const firstInvalid = document.querySelector('.is-invalid');
-            if (firstInvalid) {
-                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+        } catch (error) {
+            console.error('Full error:', error);
+            alert(`Error submitting data: ${error.message}`);
         }
     });
 
-    // Set current datetime as default
+    // Set current datetime as default (in local time for display)
     const now = new Date();
     const timezoneOffset = now.getTimezoneOffset() * 60000;
     const localISOTime = (new Date(now - timezoneOffset)).toISOString().slice(0, 16);
