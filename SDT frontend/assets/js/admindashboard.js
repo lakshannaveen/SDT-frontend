@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const logoutBtn = document.getElementById('logoutBtn');
     const manageAdminsBtn = document.getElementById('manageAdminsBtn');
     const viewUsersBtn = document.getElementById('viewUsersBtn');
-    const addDataBtn = document.getElementById('addDataBtn'); // New Button
+    const addDataBtn = document.getElementById('addDataBtn'); 
     const adminsListContainer = document.getElementById('adminsListContainer');
     const usersListContainer = document.getElementById('usersListContainer');
+    const manageDataBtn = document.getElementById('manageDataBtn');
 
     logoutBtn.addEventListener('click', function () {
         localStorage.removeItem('isAdminLoggedIn');
@@ -28,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isUsersListVisible) {
             await loadUsers();
         }
+    });
+    manageDataBtn.addEventListener('click', function() {
+        window.location.href = 'managedata.html';
     });
 
     addDataBtn.addEventListener('click', function () {
