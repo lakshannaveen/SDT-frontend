@@ -3,19 +3,43 @@
     padding: 20px;
 }
 
-.data-table th, .data-table td {
+/* Common table styles */
+.data-table, 
+.historical-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td,
+.historical-table th, .historical-table td {
     text-align: center; 
     vertical-align: middle;
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
 }
 
-.data-table th {
+.data-table th, 
+.historical-table th {
     font-weight: bold;
+    background-color: #e9ecef;
+    position: sticky;
+    top: 0;
 }
 
-.data-table tr:hover {
+.data-table thead th,
+.historical-table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.data-table tr:hover,
+.historical-table tr:hover {
     background-color: #f1f1f1;
 }
 
+/* Download button styles */
 .download-btn {
     background: linear-gradient(45deg, #FFA500, #FFD700);
     color: white;
@@ -40,47 +64,33 @@
 }
 
 /* Historical Data Section */
-..historical-section {
+.historical-section {
     margin-top: 40px;
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 8px;
 }
 
-.historical-section table {
-    margin-top: 15px;
-}
-
-.historical-section th {
-    background-color: #e9ecef;
-    position: sticky;
-    top: 0;
+.historical-section h2 {
+    margin-bottom: 20px;
 }
 
 .table-responsive {
     max-height: 500px;
     overflow-y: auto;
+    margin-bottom: 20px;
 }
 
-/* Match existing table styles */
-.historical-section table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    border-collapse: collapse;
+/* Loading spinner */
+.loading-spinner {
+    display: none;
+    text-align: center; 
+    margin: 20px; 
+    font-size: 18px; 
+    font-weight: bold;
 }
 
-.historical-section table td, 
-.historical-section table th {
-    padding: 0.75rem;
-    vertical-align: top;
-    border: 1px solid #dee2e6;
-}
-
-.historical-section table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-}
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .d-flex.justify-content-between.align-items-center {
         flex-direction: column;
@@ -88,7 +98,7 @@
         gap: 15px;
     }
     
-    #downloadPdf {
+    #downloadPdf, #downloadHistoricalPdf {
         align-self: flex-end;
     }
 }
