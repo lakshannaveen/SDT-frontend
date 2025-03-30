@@ -6,17 +6,45 @@
     <title>Contact Us</title>
      <!-- Favicon -->
      <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
-    <link rel="stylesheet" href="../assets/styles/contactus.css">
+     <link rel="stylesheet" href="../assets/css/contactus.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="contactus.js"></script>
 </head>
 <body>
-
-    <header>
+    <div class="container">
         <h1>Contact Us</h1>
-    </header>
-
-    <section class="contact-content">
-        <p>Have any questions? Reach out to us via email or phone, and we’ll be happy to assist you.</p>
-    </section>
-
+        
+        <div id="successMessage" class="success-message">
+            Thank you for your message! We'll get back to you soon.
+        </div>
+        
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            
+            <button type="submit">Send Message</button>
+        </form>
+        
+        <div class="social-media">
+            <h2>Connect With Us</h2>
+            <div class="social-icons">
+                <a href="#" class="facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
