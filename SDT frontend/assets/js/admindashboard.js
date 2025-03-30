@@ -1,38 +1,40 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Declare visibility state variables
-    let isAdminsListVisible = false; // Tracks visibility of the admins list
-    let isUsersListVisible = false; // Tracks visibility of the users list
+    let isAdminsListVisible = false;
+    let isUsersListVisible = false;
 
     const logoutBtn = document.getElementById('logoutBtn');
     const manageAdminsBtn = document.getElementById('manageAdminsBtn');
     const viewUsersBtn = document.getElementById('viewUsersBtn');
+    const addDataBtn = document.getElementById('addDataBtn'); // New Button
     const adminsListContainer = document.getElementById('adminsListContainer');
     const usersListContainer = document.getElementById('usersListContainer');
-    const adminsList = document.getElementById('adminsList');
-    const usersList = document.getElementById('usersList');
 
     logoutBtn.addEventListener('click', function () {
-        localStorage.removeItem('isAdminLoggedIn'); // Remove login status
-        window.location.href = 'adminlogin.html'; // Redirect to login page
+        localStorage.removeItem('isAdminLoggedIn');
+        window.location.href = 'adminlogin.html';
     });
 
     manageAdminsBtn.addEventListener('click', async function () {
-        isAdminsListVisible = !isAdminsListVisible; // Toggle visibility state
+        isAdminsListVisible = !isAdminsListVisible;
         adminsListContainer.style.display = isAdminsListVisible ? 'block' : 'none';
-
         if (isAdminsListVisible) {
             await loadAdmins();
         }
     });
 
     viewUsersBtn.addEventListener('click', async function () {
-        isUsersListVisible = !isUsersListVisible; // Toggle visibility state
+        isUsersListVisible = !isUsersListVisible;
         usersListContainer.style.display = isUsersListVisible ? 'block' : 'none';
-
         if (isUsersListVisible) {
             await loadUsers();
         }
     });
+
+    addDataBtn.addEventListener('click', function () {
+        window.location.href = 'data.html'; // Navigate to data.html
+    });
+
+
 
     async function loadAdmins() {
         try {

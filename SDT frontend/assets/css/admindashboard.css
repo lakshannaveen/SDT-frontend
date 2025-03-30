@@ -73,6 +73,20 @@ table tr:hover {
     font-weight: bold;
     margin-top: 10px;
 }
+#addDataBtn{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+#addDataBtn:hover {
+    background-color:  #0056b3;
+}
 #viewUsersBtn {
     display: inline-block;
     padding: 10px 20px;

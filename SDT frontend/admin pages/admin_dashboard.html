@@ -21,7 +21,8 @@
     
         <button id="manageAdminsBtn" class="btn btn-primary mt-3">Manage Admins</button>
         <button id="viewUsersBtn" class="btn btn-secondary mt-3">View Users</button>
-    
+        <button id="addDataBtn" class="btn btn-success mt-3">Add Data</button> 
+
         <div id="adminsListContainer" class="mt-4" style="display: none;">
             <h3>All Admins</h3>
             <table class="table table-bordered">
@@ -32,12 +33,10 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="adminsList">
-                    <!-- Admin rows will be dynamically inserted here -->
-                </tbody>
+                <tbody id="adminsList"></tbody>
             </table>
         </div>
-    
+
         <div id="usersListContainer" class="mt-4" style="display: none;">
             <h3>All Users</h3>
             <table class="table table-bordered">
@@ -49,9 +48,7 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="usersList">
-                    <!-- User rows will be dynamically inserted here -->
-                </tbody>
+                <tbody id="usersList"></tbody>
             </table>
         </div>
     </div>
