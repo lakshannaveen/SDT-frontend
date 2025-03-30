@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHistoricalData();
     
     // Set up refresh for real-time data
-    setInterval(fetchAirQualityData, 10000);
+    setInterval(fetchAirQualityData, 30000);
     
     // Set up PDF buttons
     document.getElementById('downloadPdf')?.addEventListener('click', downloadAsPDF);
