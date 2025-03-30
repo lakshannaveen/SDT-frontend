@@ -20,22 +20,64 @@ body {
     color: #6c757d;
 }
 
-#manageAdminsBtn {
-    display: inline-block;
+.btn {
     padding: 10px 20px;
     font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 150px;
 }
 
-#manageAdminsBtn:hover {
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-primary:hover {
     background-color: #0056b3;
 }
 
-#adminsListContainer {
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+#adminsListContainer, #usersListContainer {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -73,62 +115,16 @@ table tr:hover {
     font-weight: bold;
     margin-top: 10px;
 }
-#addDataBtn{
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-#addDataBtn:hover {
-    background-color:  #0056b3;
-}
-#manageDataBtn{
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-#manageDataBtn:hover {
-    background-color:  #0056b3;
-}
-#viewUsersBtn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-}
 
-#viewUsersBtn:hover {
-    background-color:  #0056b3;
-}
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
-
-.btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

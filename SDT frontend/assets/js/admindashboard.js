@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'data.html'; // Navigate to data.html
     });
 
-
-
     async function loadAdmins() {
         try {
             const response = await fetch('https://localhost:7073/api/admin/all');
