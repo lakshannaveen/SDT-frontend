@@ -38,6 +38,49 @@
 .d-flex.justify-content-end {
     margin-bottom: 10px;
 }
+
+/* Historical Data Section */
+..historical-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.historical-section table {
+    margin-top: 15px;
+}
+
+.historical-section th {
+    background-color: #e9ecef;
+    position: sticky;
+    top: 0;
+}
+
+.table-responsive {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* Match existing table styles */
+.historical-section table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+.historical-section table td, 
+.historical-section table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+.historical-section table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
 @media (max-width: 768px) {
     .d-flex.justify-content-between.align-items-center {
         flex-direction: column;

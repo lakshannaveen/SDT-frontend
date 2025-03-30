@@ -1,30 +1,27 @@
 const apiBaseUrl = "https://localhost:7073/api/airquality";
-let currentData = []; // Store the current data for PDF generation
+let currentData = []; // For real-time data
+let historicalCurrentData = []; // For historical data
 
+// Real-time data functions (unchanged)
 function fetchAirQualityData() {
-    const loadingSpinner = document.getElementById("loadingSpinner"); // Reference to the spinner
+    const loadingSpinner = document.getElementById("loadingSpinner");
     const dataTable = document.getElementById("dataTable");
 
-    // Show the loading spinner
     loadingSpinner.style.display = "block";
-    dataTable.style.opacity = "0.5"; // Optional: Dim the table while loading
+    dataTable.style.opacity = "0.5";
 
     fetch(apiBaseUrl)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.json();
         })
         .then(apiResponse => {
-            console.log("Full API Response:", apiResponse); // Debug log
+            console.log("Full API Response:", apiResponse);
             
-            if (apiResponse.status !== "ok") {
-                throw new Error("API response status not ok");
-            }
+            if (apiResponse.status !== "ok") throw new Error("API response status not ok");
 
             dataTable.innerHTML = "";
-            currentData = []; // Reset current data
+            currentData = [];
 
             apiResponse.stations.forEach(station => {
                 const stationData = station.data;
@@ -55,22 +52,125 @@ function fetchAirQualityData() {
                 dataTable.appendChild(row);
             });
         })
-        .catch(error => {
-            console.error("Error fetching data:", error);
-        })
+        .catch(error => console.error("Error fetching data:", error))
         .finally(() => {
-            // Hide the loading spinner
             loadingSpinner.style.display = "none";
-            dataTable.style.opacity = "1"; // Restore table opacity
+            dataTable.style.opacity = "1";
         });
 }
 
-// Initial fetch
-fetchAirQualityData();
-// Refresh every 10 seconds
-setInterval(fetchAirQualityData, 10000);
+// Historical data functions
+async function loadHistoricalData() {
+    const tableBody = document.getElementById('historicalDataTable');
+    tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Loading data...</td></tr>';
 
-// Add event listener for the download button
+    try {
+        const response = await fetch('https://localhost:7073/api/stationdata/historical');
+        
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
+        const data = await response.json();
+        historicalCurrentData = data || [];
+        
+        if (historicalCurrentData.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No historical data available</td></tr>';
+            return;
+        }
+
+        tableBody.innerHTML = '';
+        
+        historicalCurrentData.forEach(station => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${station.stationName}</td>
+                <td>${new Date(station.timestamp).toLocaleString()}</td>
+                <td>${station.aqi}</td>
+                <td>${getPm25Value(station)}</td>
+                <td>${station.co}</td>
+                <td>${station.temperature}</td>
+                <td>${station.humidity}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error loading historical data:', error);
+        tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Error loading data: ${error.message}</td></tr>`;
+    }
+}
+function getPm25Value(station) {
+    
+    return station.pm25 || station.PM25 || station.pM25 || station.Pm25 || "N/A";
+}
+// PDF Download functions
+function downloadAsPDF() {
+    // Real-time data PDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Add title
+    doc.text("Real-time Air Quality Data", 10, 10);
+    
+    // Prepare data
+    const headers = [["Location", "CO2", "PM2.5", "Temp", "Humidity", "Last Updated"]];
+    const data = currentData.map(item => [
+        item.location,
+        item.co2,
+        item.pm25,
+        item.temperature,
+        item.humidity,
+        item.lastUpdated
+    ]);
+    
+    // Add table
+    doc.autoTable({
+        head: headers,
+        body: data,
+        startY: 20
+    });
+    
+    doc.save('real-time-air-quality.pdf');
+}
+
+function downloadHistoricalAsPDF() {
+    // Historical data PDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Add title
+    doc.text("Historical Air Quality Data", 10, 10);
+    
+    // Prepare data
+    const headers = [["Station", "Timestamp", "AQI", "PM25", "CO", "Temp", "Humidity"]];
+    const data = historicalCurrentData.map(item => [
+        item.stationName,
+        new Date(item.timestamp).toLocaleString(),
+        item.aqi,
+        item.pm25,
+        item.co,
+        item.temperature,
+        item.humidity
+    ]);
+    
+    // Add table
+    doc.autoTable({
+        head: headers,
+        body: data,
+        startY: 20
+    });
+    
+    doc.save('historical-air-quality.pdf');
+}
+
+// Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
+    // Load data
+    fetchAirQualityData();
+    loadHistoricalData();
+    
+    // Set up refresh for real-time data
+    setInterval(fetchAirQualityData, 10000);
+    
+    // Set up PDF buttons
     document.getElementById('downloadPdf')?.addEventListener('click', downloadAsPDF);
+    document.getElementById('downloadHistoricalPdf')?.addEventListener('click', downloadHistoricalAsPDF);
 });
