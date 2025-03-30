@@ -1,22 +1,131 @@
+/* Base Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
 }
 
-header {
-    background-color: #d97706;
-    color: white;
-    text-align: center;
-    padding: 20px;
+/* Container */
+.about-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
 }
 
-.about-content {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
+/* Main Box */
+.about-box {
     background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header Box */
+.header-box {
+    background: linear-gradient(135deg, #1e88e5, #0d47a1);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.header-box h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Content Box */
+.content-box {
+    padding: 30px;
+}
+
+/* Section Styles */
+.box-section {
+    margin-bottom: 30px;
+    padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.box-section:hover {
+    transform: translateY(-5px);
+}
+
+.box-section h2 {
+    color: #1e88e5;
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Individual Section Colors */
+.mission {
+    background-color: #e3f2fd;
+    border-left: 5px solid #1e88e5;
+}
+
+.features {
+    background-color: #f5f5f5;
+    border-left: 5px solid #616161;
+}
+
+.features ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.features li {
+    margin-bottom: 15px;
+    padding-left: 35px;
+    position: relative;
+    font-size: 1.05rem;
+}
+
+.feature-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+}
+
+.technology {
+    background-color: #e8f5e9;
+    border-left: 5px solid #43a047;
+}
+
+.team {
+    background-color: #fff8e1;
+    border-left: 5px solid #ffb300;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-box h1 {
+        font-size: 1.8rem;
+    }
+    
+    .content-box {
+        padding: 20px;
+    }
+    
+    .box-section {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-box {
+        padding: 20px;
+    }
+    
+    .header-box h1 {
+        font-size: 1.5rem;
+    }
 }

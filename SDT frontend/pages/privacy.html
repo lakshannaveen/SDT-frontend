@@ -3,21 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy</title>
-     <!-- Favicon -->
-     <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
+    <title>Privacy Policy - Colombo Air Quality</title>
+    <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
     <link rel="stylesheet" href="../assets/styles/privacy.css">
 </head>
 <body>
+    <div class="privacy-container">
+        <header>
+            <h1>Your Data Protection</h1>
+            <p>How we safeguard your information</p>
+        </header>
 
-    <header>
-        <h1>Privacy Policy</h1>
-    </header>
+        <main class="privacy-content">
+            <section class="data-protection">
+                <h2><span class="icon">🔒</span> We Protect</h2>
+                <ul>
+                    <li>Your account details (email, password)</li>
+                    <li>Notification preferences</li>
+                 
+                </ul>
+            </section>
 
-    <section class="privacy-content">
-        <p>We value your privacy and are committed to protecting your personal information.</p>
-        <p>Read our policy to understand how we collect, use, and safeguard your data.</p>
-    </section>
+            <section class="data-use">
+                <h2><span class="icon">📊</span> We Use Data To</h2>
+                <ul>
+                    <li>Provide accurate air quality alerts</li>
+                    <li>Improve our services</li>
+                    <li>Create anonymous statistics</li>
+                    <li>Personalize your experience</li>
+                </ul>
+            </section>
 
+            <section class="data-share">
+                <h2><span class="icon">🚫</span> We Never</h2>
+                <ul>
+                    <li>Sell your personal data</li>
+                    <li>Share your exact location without consent</li>
+                    <li>Keep unnecessary information</li>
+                </ul>
+            </section>
+
+            <section class="contact">
+                <h2><span class="icon">✉️</span> Questions?</h2>
+                <p>Email us at: <a href="mailto:privacy@colomboair.lk">privacy@colomboair.lk</a></p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Last updated: <span id="current-date"></span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric'
+        });
+    </script>
 </body>
 </html>
