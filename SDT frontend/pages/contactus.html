@@ -4,19 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-     <!-- Favicon -->
-     <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
-    <link rel="stylesheet" href="../assets/styles/contactus.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/SDT frontend/assets/images/favicon.ico">
+    <link rel="stylesheet" href="../assets/css/contactus.css">
 </head>
 <body>
-
     <header>
         <h1>Contact Us</h1>
     </header>
 
     <section class="contact-content">
-        <p>Have any questions? Reach out to us via email or phone, and we’ll be happy to assist you.</p>
+        <p>Have any questions? Reach out to us via the form below or directly via email/phone.</p>
+        
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message (max 100 words):</label>
+                <textarea id="message" name="message" rows="5" required maxlength="500"></textarea>
+                <div class="word-count">Words: <span id="wordCount">0</span>/100</div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        
+        <div id="successMessage" class="success-message" style="display: none;">
+            Thank you for contacting us! We'll get back to you soon.
+        </div>
+        <div id="errorMessage" class="error-message" style="display: none;">
+            There was an error submitting your form. Please try again.
+        </div>
     </section>
 
+    <script src="../assets/js/contactus.js"></script>
 </body>
 </html>
