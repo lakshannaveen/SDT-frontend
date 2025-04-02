@@ -26,6 +26,7 @@
             <button id="viewUsersBtn" class="btn btn-secondary">Manage Users</button>
             <button id="addDataBtn" class="btn btn-success">Add Sensors</button> 
             <button id="manageDataBtn" class="btn btn-info">Manage Sensors</button>
+            <button id="viewContactsBtn" class="btn btn-warning">View Inquiries</button>
         </div>
 
         <div id="adminsListContainer" class="mt-4" style="display: none;">
@@ -54,6 +55,24 @@
                     </tr>
                 </thead>
                 <tbody id="usersList"></tbody>
+            </table>
+        </div>
+
+        <div id="contactsListContainer" class="mt-4" style="display: none;">
+            <h3>Contact Inquiries</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Submitted At</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="contactsList"></tbody>
             </table>
         </div>
     </div>

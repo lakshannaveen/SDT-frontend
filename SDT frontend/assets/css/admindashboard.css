@@ -62,6 +62,15 @@ body {
     background-color: #138496;
 }
 
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
 .btn-danger {
     background-color: #dc3545;
 }
@@ -77,7 +86,7 @@ body {
     border-radius: 0.2rem;
 }
 
-#adminsListContainer, #usersListContainer {
+#adminsListContainer, #usersListContainer, #contactsListContainer {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -110,6 +119,15 @@ table tr:hover {
     background-color: #e9ecef;
 }
 
+.email-link, .phone-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.email-link:hover, .phone-link:hover {
+    text-decoration: underline;
+}
+
 #errorMessage {
     color: red;
     font-weight: bold;
@@ -126,5 +144,10 @@ table tr:hover {
     .btn {
         width: 100%;
         margin-bottom: 10px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
     }
 }
