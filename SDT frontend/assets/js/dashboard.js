@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.status === "ok") {
                 data.data.forEach(station => {
                     if (station.aqi >= 0) { // Only show stations with valid data
+                        // Store the current AQI reading
+                        storeAqiReading(station.location, station.aqi);
+                        
                         const popupContent = createPopupContent(station);
                         
                         const marker = L.marker(station.coordinates, {
@@ -54,6 +57,103 @@ document.addEventListener("DOMContentLoaded", function () {
                 .openPopup();
         });
 
+    // Store AQI reading in localStorage
+    function storeAqiReading(location, aqi) {
+        const now = new Date();
+        const key = `aqi_${location.replace(/\s+/g, '_')}`;
+        
+        // Get existing data or initialize
+        const storedData = JSON.parse(localStorage.getItem(key)) || { readings: [] };
+        
+        // Add new reading
+        storedData.readings.push({
+            timestamp: now.getTime(),
+            aqi: aqi
+        });
+        
+        // Keep only the last 24 hours of data
+        const twentyFourHoursAgo = now.getTime() - (24 * 60 * 60 * 1000);
+        storedData.readings = storedData.readings.filter(reading => reading.timestamp >= twentyFourHoursAgo);
+        
+        // Save back to localStorage
+        localStorage.setItem(key, JSON.stringify(storedData));
+    }
+
+    // Get stored AQI readings for a location
+    function getAqiHistory(location) {
+        const key = `aqi_${location.replace(/\s+/g, '_')}`;
+        const storedData = JSON.parse(localStorage.getItem(key)) || { readings: [] };
+        
+        // Sort readings by timestamp (oldest first)
+        storedData.readings.sort((a, b) => a.timestamp - b.timestamp);
+        
+        return storedData.readings;
+    }
+
+    // Create chart for AQI history
+    function createAqiChart(location, canvasId) {
+        const readings = getAqiHistory(location);
+        
+        if (readings.length === 0) {
+            return '<p>No historical data available</p>';
+        }
+        
+        const timestamps = readings.map(r => new Date(r.timestamp).toLocaleTimeString());
+        const aqiValues = readings.map(r => r.aqi);
+        
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        return new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                    label: 'AQI',
+                    data: aqiValues,
+                    borderColor: '#4CAF50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.1,
+                    pointRadius: 3,
+                    pointBackgroundColor: function(context) {
+                        const value = context.dataset.data[context.dataIndex];
+                        return getAqiColor(value);
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Last 24 Hours AQI'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `AQI: ${context.raw} (${getAqiLevel(context.raw)})`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'AQI Value'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     // AQI color scale function
     function getAqiColor(aqi) {
         if (aqi < 0) return "#AAAAAA";     // Gray for invalid data
@@ -65,9 +165,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return "#7E0023";                 // Maroon
     }
 
-    // Create popup content with table and download button
+    // Create popup content with table, chart and download button
     function createPopupContent(station) {
         const timestamp = new Date(station.lastUpdated).toLocaleString();
+        const chartId = `chart-${Math.random().toString(36).substr(2, 9)}`;
         
         // Create table rows for all available data
         let tableRows = '';
@@ -117,8 +218,6 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
         }
         
-        // Add any additional fields here following the same pattern
-        
         // Create download button with onclick handler
         const downloadButton = `
             <button class="download-pdf-btn" 
@@ -139,6 +238,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         ${tableRows}
                     </tbody>
                 </table>
+                
+                <div class="aqi-chart-container">
+                    <canvas id="${chartId}" width="300" height="200"></canvas>
+                </div>
+                
                 ${downloadButton}
             </div>
         `;
@@ -228,4 +332,23 @@ document.addEventListener("DOMContentLoaded", function () {
         // Save the PDF
         doc.save(`AQI_Report_${location.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`);
     };
+
+    // Initialize charts when popup opens
+    map.on('popupopen', function(e) {
+        const popup = e.popup;
+        const content = popup.getContent();
+        const locationMatch = content.match(/<h3 class="popup-title">([^<]+)<\/h3>/);
+        
+        if (locationMatch && locationMatch[1]) {
+            const location = locationMatch[1];
+            const chartIdMatch = content.match(/<canvas id="([^"]+)"/);
+            
+            if (chartIdMatch && chartIdMatch[1]) {
+                const chartId = chartIdMatch[1];
+                setTimeout(() => {
+                    createAqiChart(location, chartId);
+                }, 100); // Small delay to ensure canvas is rendered
+            }
+        }
+    });
 });

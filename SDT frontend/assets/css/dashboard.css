@@ -92,7 +92,7 @@
 }
 
 .download-pdf-btn:hover {
-    background: linear-gradient(45deg, #FF8C00, #FFC700;
+    background: linear-gradient(45deg, #FF8C00, #FFC700);
 }
 
 .popup-title {
@@ -107,4 +107,21 @@
     color: #666;
     text-align: right;
     margin-bottom: 10px;
+}
+
+/* Chart container */
+.aqi-chart-container {
+    margin: 15px 0;
+    width: 300px;
+    height: 200px;
+}
+
+/* Leaflet popup adjustments */
+.leaflet-popup-content {
+    margin: 13px 19px;
+    min-width: 320px;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
 }
